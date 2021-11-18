@@ -1,28 +1,52 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
-    <!-- ... -->
-
-    {% block stylesheets %}
-        {# 'app' must match the first argument to addEntry() in webpack.config.js #}{{ encore_entry_link_tags('app') }}
-
-        <!-- Renders a link tag (if your module requires any CSS)
-             <link rel="stylesheet" href="/build/app.css"> -->
-    {% endblock %}
-
-    {% block javascripts %}
-        {{ encore_entry_script_tags('app') }}
-
-        <!-- Renders app.js & a webpack runtime.js file
-            <script src="/build/runtime.js" defer></script>
-            <script src="/build/app.js" defer></script>
-            See note below about the "defer" attribute -->
-    {% endblock %}
+    {% include 'dashboard/common/head.html.twig' %}
 </head>
 
-<body>
-    {% block body %}{% endblock %}
-</body>
+<body id="page-top">
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+        <!-- Sidebar -->
+        {% include 'dashboard/common/nav.html.twig' %}
+        <!-- End of Sidebar -->
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+            <!-- Main Content -->
+            <div id="content">
+                <!-- Topbar -->
+                {% include 'dashboard/common/topbar.html.twig' %}
+                <!-- End of Topbar -->
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+                    {% block content %}{% endblock %}
+                </div>
+                <!-- /.container-fluid -->
+            </div>
+            <!-- End of Main Content -->
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                {% include 'dashboard/common/footer.html.twig' %}
+            </footer>
+            <!-- End of Footer -->
+        </div>
+        <!-- End of Content Wrapper -->
+    </div>
+    <!-- End of Page Wrapper -->
 
-<!-- ... -->
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+</a>
+
+<!-- Logout Modal-->
+{% include 'dashboard/partials/modals/logout.modal.html.twig' %}
+
+<!-- Javascript -->
+{% include 'dashboard/common/scripts.html.twig' %}
+
+<!-- Core plugin JavaScript-->
+<!-- <script src="vendor/jquery-easing/jquery.easing.min.js"></script> -->
+</body>
 </html>
