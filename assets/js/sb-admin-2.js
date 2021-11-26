@@ -1,5 +1,3 @@
-import './vendors'
-
 (function($) {
   "use strict"; // Start of use strict
 

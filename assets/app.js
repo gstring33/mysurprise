@@ -10,4 +10,14 @@ import './styles/scss/sb-admin-2.scss';
 
 // start the Stimulus application
 //import './bootstrap';
+const $ = require('jquery');
+window.jQuery = $;
+// this "modifies" the jquery module: adding behavior to it
+// the bootstrap module doesn't export/return anything
+require('bootstrap');
+$(document).ready(function() {
+    $('[data-toggle="popover"]').popover();
+});
+require('@fortawesome/fontawesome-free')
+
 import './js/sb-admin-2';
