@@ -61,6 +61,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $isChoiceAllowed;
 
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $uuid;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -206,6 +211,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsChoiceAllowed(bool $isChoiceAllowed): self
     {
         $this->isChoiceAllowed = $isChoiceAllowed;
+
+        return $this;
+    }
+
+    public function getUuid(): ?string
+    {
+        return $this->uuid;
+    }
+
+    public function setUuid(string $uuid): self
+    {
+        $this->uuid = $uuid;
 
         return $this;
     }
