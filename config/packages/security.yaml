@@ -23,6 +23,7 @@ security:
             form_login:
                 login_path: app.login
                 check_path: app.login
+                default_target_path: app.home
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
@@ -33,5 +34,9 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
-        # - { path: ^/profile, roles: ROLE_USER }
+         - { path: ^/app/admin, roles: [ROLE_SUPER_ADMIN, IS_AUTHENTICATED_FULLY] }
+         - { path: ^/app, roles: [ROLE_USER, IS_AUTHENTICATED_FULLY] }
+         - { path: ^/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+    role_hierarchy:
+        ROLE_USER:       ROLE_USER,
+        ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN]
