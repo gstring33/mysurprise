@@ -24,12 +24,9 @@ security:
                 login_path: app.login
                 check_path: app.login
                 default_target_path: app.home
-
-            # activate different ways to authenticate
-            # https://symfony.com/doc/current/security.html#the-firewall
-
-            # https://symfony.com/doc/current/security/impersonating_user.html
-            # switch_user: true
+            logout:
+                path: app.logout
+                target: app.login
 
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
