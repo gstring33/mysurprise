@@ -58,7 +58,7 @@ class CreateUserAdminCommand extends Command
             ->setEmail('martindhenu@yahoo.fr')
             ->setRoles(['ROLE_SUPER_ADMIN'])
             ->setUuid(Uuid::v4())
-            ->setIsActiv(1)
+            ->setIsVerified(1)
             ->setIsChoiceAllowed(0);
         $passwordHashed = $this->hasher->hashPassword($superAdmin, '<?NitrAM81>');
         $superAdmin->setPassword($passwordHashed);

@@ -4,12 +4,14 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @ORM\Table(name="`user`")
+ * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -18,53 +20,53 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
      */
-    private $id;
+    private ?int $id;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
      */
-    private $email;
+    private ?string $email;
 
     /**
      * @ORM\Column(type="json")
      */
-    private $roles = [];
+    private array $roles = [];
 
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
      */
-    private $password;
+    private string $password;
 
     /**
      * @ORM\Column(type="string", length=100)
      */
-    private $firstname;
+    private ?string $firstname;
 
     /**
      * @ORM\Column(type="string", length=100)
      */
-    private $lastname;
+    private ?string $lastname;
 
     /**
      * @ORM\Column(type="datetime_immutable", nullable=true)
      */
-    private $lastConnexionAt;
+    private ?\DateTimeImmutable $lastConnexionAt;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $isActiv;
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $isChoiceAllowed;
+    private ?bool $isChoiceAllowed;
 
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $uuid;
+    private ?string $uuid;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private bool $isVerified = false;
 
     public function getId(): ?int
     {
@@ -191,18 +193,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getIsActiv(): ?bool
-    {
-        return $this->isActiv;
-    }
-
-    public function setIsActiv(bool $isActiv): self
-    {
-        $this->isActiv = $isActiv;
-
-        return $this;
-    }
-
     public function getIsChoiceAllowed(): ?bool
     {
         return $this->isChoiceAllowed;
@@ -223,6 +213,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setUuid(string $uuid): self
     {
         $this->uuid = $uuid;
+
+        return $this;
+    }
+
+    public function isVerified(): bool
+    {
+        return $this->isVerified;
+    }
+
+    public function setIsVerified(bool $isVerified): self
+    {
+        $this->isVerified = $isVerified;
 
         return $this;
     }
