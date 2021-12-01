@@ -12,11 +12,6 @@
                         <div class="text-center">
                             <h1 class="h4 text-gray-900 mb-4">Créer un nouveau compte</h1>
                         </div>
-                        {% for flashError in app.flashes('verify_email_error') %}
-                            <div class="alert alert-danger" role="alert">
-                                {{ flashError }}
-                            </div>
-                        {% endfor %}
                         {% for flashSuccess in app.flashes('success') %}
                             <div class="alert alert-success" role="alert">
                                 {{ flashSuccess }}
