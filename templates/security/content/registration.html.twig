@@ -29,7 +29,7 @@
                                 {{ form_widget(registrationForm.firstname, {
                                     'attr': {
                                         'placeholder': 'Prénom',
-                                        'class': 'form-control form-control-user'
+                                        'class': 'form-control-user'
                                     }
                                 }) }}
                             </div>
@@ -46,7 +46,7 @@
                             {{ form_widget(registrationForm.email, {
                                 'attr': {
                                     'placeholder': 'Adresse e-mail',
-                                    'class': 'form-control form-control-user'
+                                    'class': 'form-control-user'
                                 }
                             }) }}
                         </div>
@@ -55,7 +55,7 @@
                                 {{ form_widget(registrationForm.password.first, {
                                     'attr': {
                                         'placeholder': 'Mot de passe',
-                                        'class': 'form-control form-control-user'
+                                        'class': 'form-control-user'
                                     }
                                 }) }}
                             </div>
@@ -63,10 +63,13 @@
                                 {{ form_widget(registrationForm.password.second, {
                                     'attr': {
                                         'placeholder': 'Confirmation du mot de passe',
-                                        'class': 'form-control form-control-user'
+                                        'class': 'form-control-user'
                                     }
                                 }) }}
                             </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="g-recaptcha pt-3 pb-3" data-sitekey="{{ recaptcha_site_key }}"></div>
                         </div>
 
                         <button type="submit" class="btn btn-primary btn-user btn-block">Enregistrer mon compte</button>
