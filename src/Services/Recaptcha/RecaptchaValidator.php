@@ -5,7 +5,7 @@ namespace App\Services\Recaptcha;
 use ReCaptcha\ReCaptcha;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-class RecaptchaValidator
+class RecaptchaValidator implements RecaptchaValidatorInterface
 {
     /** @var Recaptcha */
     private Recaptcha $recaptcha;
@@ -30,7 +30,7 @@ class RecaptchaValidator
     /**
      * @return bool
      */
-    public function verify()
+    public function verify(): bool
     {
         $request = $this->requestStack->getCurrentRequest();
         $resp = $this->recaptcha->verify(

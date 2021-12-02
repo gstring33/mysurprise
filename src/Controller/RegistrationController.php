@@ -5,7 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Repository\UserRepository;
-use App\Services\Recaptcha\RecaptchaValidator;
+use App\Services\Recaptcha\RecaptchaValidatorInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,14 +16,14 @@ use Symfony\Component\Uid\Uuid;
 
 class RegistrationController extends AbstractController
 {
-    /** @var RecaptchaValidator */
-    private RecaptchaValidator $recaptchaValidator;
+    /** @var RecaptchaValidatorInterface */
+    private RecaptchaValidatorInterface $recaptchaValidator;
 
     /**
      * RegistrationController constructor.
-     * @param RecaptchaValidator $recaptchaValidator
+     * @param RecaptchaValidatorInterface $recaptchaValidator
      */
-    public function __construct(RecaptchaValidator $recaptchaValidator)
+    public function __construct(RecaptchaValidatorInterface $recaptchaValidator)
     {
         $this->recaptchaValidator = $recaptchaValidator;
     }
