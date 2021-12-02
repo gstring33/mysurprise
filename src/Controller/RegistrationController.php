@@ -5,7 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Repository\UserRepository;
-use ReCaptcha\ReCaptcha;
+use App\Services\Recaptcha\RecaptchaValidator;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,15 +16,16 @@ use Symfony\Component\Uid\Uuid;
 
 class RegistrationController extends AbstractController
 {
-    private string $recaptchaSecretKet;
+    /** @var RecaptchaValidator */
+    private RecaptchaValidator $recaptchaValidator;
 
     /**
      * RegistrationController constructor.
-     * @param string $recaptchaSecretKet
+     * @param RecaptchaValidator $recaptchaValidator
      */
-    public function __construct(string $recaptchaSecretKet)
+    public function __construct(RecaptchaValidator $recaptchaValidator)
     {
-        $this->recaptchaSecretKet = $recaptchaSecretKet;
+        $this->recaptchaValidator = $recaptchaValidator;
     }
 
     /**
@@ -40,10 +41,7 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $recaptcha = new ReCaptcha($this->recaptchaSecretKet);
-            $resp = $recaptcha->verify($request->request->get('g-recaptcha-response'), $request->getClientIp());
-
-            if (!$resp->isSuccess()) {
+            if (!$this->recaptchaValidator->verify()) {
                 $this->addFlash('error', 'Le Recaptcha doit être coché');
                 return $this->render('security/content/registration.html.twig', [
                     'registrationForm' => $form->createView()

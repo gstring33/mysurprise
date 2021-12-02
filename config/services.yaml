@@ -29,7 +29,14 @@ services:
         tags:
             - { name: console.command }
 
-    # Controller
-    App\Controller\RegistrationController:
+    # Recaptcha
+    ReCaptcha\ReCaptcha:
         bind:
-            $recaptchaSecretKet: '%recaptcha_secret_key%'
+            $secret: '%recaptcha_secret_key%'
+
+    app.recaptcha_validator:
+        class: App\Services\Recaptcha\RecaptchaValidator
+        bind:
+            $recaptcha: '@ReCaptcha\ReCaptcha'
+
+
