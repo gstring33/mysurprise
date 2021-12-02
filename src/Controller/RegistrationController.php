@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\RegistrationFormType;
 use App\Repository\UserRepository;
+use ReCaptcha\ReCaptcha;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,6 +16,17 @@ use Symfony\Component\Uid\Uuid;
 
 class RegistrationController extends AbstractController
 {
+    private string $recaptchaSecretKet;
+
+    /**
+     * RegistrationController constructor.
+     * @param string $recaptchaSecretKet
+     */
+    public function __construct(string $recaptchaSecretKet)
+    {
+        $this->recaptchaSecretKet = $recaptchaSecretKet;
+    }
+
     /**
          * @Route("/register", name="app.register")
      * @param Request $request
@@ -28,7 +40,16 @@ class RegistrationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            // encode the plain password
+            $recaptcha = new ReCaptcha($this->recaptchaSecretKet);
+            $resp = $recaptcha->verify($request->request->get('g-recaptcha-response'), $request->getClientIp());
+
+            if (!$resp->isSuccess()) {
+                $this->addFlash('error', 'Le Recaptcha doit être coché');
+                return $this->render('security/content/registration.html.twig', [
+                    'registrationForm' => $form->createView()
+                ]);
+            }
+            // Persist the user in DB
             $user->setIsChoiceAllowed(0)
                 ->setIsVerified(0)
                 ->setRoles(['ROLE_USER'])

@@ -17,6 +17,11 @@
                                 {{ flashSuccess }}
                             </div>
                         {% endfor %}
+                        {% for flashError in app.flashes('error') %}
+                        <div class="alert alert-danger" role="alert">
+                            {{ flashError }}
+                        </div>
+                        {% endfor %}
                         {{ form_start(registrationForm, {
                             'action': path('app.register'),
                             'method': 'POST',
