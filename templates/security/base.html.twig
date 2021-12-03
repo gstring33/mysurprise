@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% include 'security/common/head.html.twig' %}
+</head>
+
+<body class="bg-gradient-primary">
+
+<div class="container">
+    {% block body %}{% endblock %}
+</div>
+
+<!-- Javascript -->
+{% include 'security/common/scripts.html.twig' %}
+
+</body>
+
+</html>

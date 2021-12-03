@@ -1,20 +1,20 @@
 <?php
 
-
 namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class MainController extends AbstractController
+class LandingPageController extends AbstractController
 {
     /**
-     * @Route("/", name="app.home")
-     * @return Response
+     * @Route("/", name="app.landingpage")
      */
     public function index(): Response
     {
-        return $this->render('dashboard/content/main.html.twig');
+        return $this->render('landing_page/content/index.html.twig', [
+            'controller_name' => 'LandingPageController',
+        ]);
     }
 }

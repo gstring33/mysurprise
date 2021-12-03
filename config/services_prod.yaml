@@ -1,0 +1,13 @@
+parameters:
+  recaptcha_secret_key: '%env(RECAPTCHA_SECRET_KEY)%'
+
+services:
+  # Recaptcha
+  ReCaptcha\ReCaptcha:
+    bind:
+      $secret: '%recaptcha_secret_key%'
+
+  App\Services\Recaptcha\RecaptchaValidatorInterface:
+    class: App\Services\Recaptcha\RecaptchaValidator
+    bind:
+      $recaptcha: '@ReCaptcha\ReCaptcha'
