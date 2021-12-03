@@ -13,11 +13,32 @@
         <li class="nav-item active">
             <a class="nav-link" href="/">
                 <i class="fas fa-home"></i>
-                <span>General</span>
+                <span>Accueil</span>
             </a>
         </li>
         <!-- Divider -->
         <hr class="sidebar-divider">
+
+        {% if is_granted('ROLE_SUPER_ADMIN') %}
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Administration
+            </div>
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUserDashboard"
+                   aria-expanded="true" aria-controls="collapseUserDashboard">
+                    <i class="fas fa-user"></i>
+                    <span>Utilisateurs</span>
+                </a>
+                <div id="collapseUserDashboard" class="collapse" aria-labelledby="headingUserDashboard" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <a class="collapse-item" href="{{ path('app.admin.users') }}">Gérer les utilisateurs</a>
+                    </div>
+                </div>
+            </li>
+        {% endif %}
 
         <!-- Heading -->
         <div class="sidebar-heading">
