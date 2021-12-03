@@ -1,13 +1,73 @@
 {% extends 'dashboard/base.html.twig' %}
 
 {% block content %}
-    <!-- Page Heading -->
-    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Admin - Utilisateurs</h1>
-    </div>
-    <div class="row">
-        <div class="col-xl-3 col-md-6 mb-4">
-            Some Content
+    <!-- Begin Page Content -->
+    <div class="container-fluid">
+
+        <!-- Page Heading -->
+        <h1 class="h3 mb-2 text-info">Gestion des utilisateurs</h1>
+
+        <!-- DataTales Example -->
+        <div class="card shadow mb-4 mt-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-gray-500">Liste des utilisateurs</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                        <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>Uuid</th>
+                            <th>Prénom</th>
+                            <th>Nom</th>
+                            <th>Email</th>
+                            <th>Dernière connexion</th>
+                            <th>Email vérifié</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>1234h-de4567-3erffvg6-qwe456-12sdcv</td>
+                                <td>Marc</td>
+                                <td>Dupont</td>
+                                <td>marc.dupont@yahoo.fr</td>
+                                <td>20.08.2020</td>
+                                <td><i class="far fa-check-circle"></i></td>
+                                <td>
+                                    <a href="#" class="btn btn-danger btn-circle btn-sm">
+                                        <i class="fas fa-user-times"></i>
+                                    </a>
+                                    <a href="#" class="btn btn-warning btn-circle btn-sm">
+                                        <i class="fas fa-user-edit"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>1234h-de4567-3erffvg6-qwe456-12sdcv</td>
+                                <td>Sylvain</td>
+                                <td>Fournier</td>
+                                <td>sylvain.fournier@yahoo.fr</td>
+                                <td>20.07.2021</td>
+                                <td><i class="far fa-times-circle"></i></td>
+                                <td>
+                                    <a href="#" class="btn btn-danger btn-circle btn-sm">
+                                        <i class="fas fa-user-times"></i>
+                                    </a>
+                                    <a href="#" class="btn btn-warning btn-circle btn-sm">
+                                        <i class="fas fa-user-edit"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
+
     </div>
+    <!-- /.container-fluid -->
 {% endblock %}
